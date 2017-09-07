@@ -5,8 +5,10 @@ public class Remind {
     String date;
     String title;
     String detail;
-    public Remind(String date,String title,String detail)
+    int id;
+    public Remind(int id,String date,String title,String detail)
     {
+        this.id = id;
         this.date = date;
         this.title = title;
         this.detail = detail;
@@ -18,6 +20,10 @@ public class Remind {
     public void setDate(String date)
     {
         this.date = date;
+    }
+    public int getId()
+    {
+        return this.id;
     }
     public String getDetail()
     {

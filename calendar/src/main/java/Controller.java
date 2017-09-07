@@ -4,14 +4,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.converter.FormatStringConverter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 public class Controller {
 
     @FXML
     protected Button buttonEdit;
-
+    @FXML
+    protected Button buttonRefresh;
     @FXML
     protected Button buttonSave;
     @FXML
@@ -25,23 +29,61 @@ public class Controller {
     @FXML
     protected ComboBox<String> comboBoxRemind;
 
+    private Database database;
 
 
     Calendar calendar;
     public Controller()
     {
         calendar = new Calendar();
-    }
+        database = new Database();
+//        calendar.setID(database.id);
+        System.out.println(database.id+"      data");
+//        calendar.addRemind("1","2","3");
+        this.install();
+        for (int i =0 ;i<calendar.getList().size();i++)
+        {
+            System.out.println(calendar.getList().get(i).getTitle());
+        }
+//        database.insert(calendar.id+1,"1","2","3");
 
+    }
+    public void install()
+    {
+//        String[] a = database.getData().get(0);
+        for (int i =0 ;i < database.getData().size();i++)
+        {
+            int id = Integer.parseInt(database.getData().get(i)[0]);
+            String detail = database.getData().get(i)[3];
+            String date = database.getData().get(i)[1];
+            String title = database.getData().get(i)[2];
+            calendar.addRemind(id,date,title,detail);
+//            System.out.println(this.textAreaRemind +"                 noel");
+//            updateRemindUI(title,date);
+        }
+    }
     @FXML
     public void clickBtnRemove()
     {
-        this.calendar.deletePoint(this.comboBoxRemind.getValue());
+        String a = this.comboBoxRemind.getValue();
+//        int b=0;
+        for (int i =0;i<this.calendar.getList().size();i++)
+        {
+            if (a == this.calendar.getList().get(i).getTitle()){
+                database.delete(this.calendar.getList().get(i).getId());
+//                b = ;
+                break;
+            }
+        }
+
+
+        this.calendar.deletePoint(a);
         String li="";
         for (int i=0;i<this.calendar.getList().size();i++)
         {
-            li += this.calendar.getList().get(i).getTitle()+"\n";
+            li += this.calendar.getList().get(i).getTitle()+"  -----"+this.calendar.getList().get(i).getDate()+"\n";
         }
+//        this.textAreaRemind.setText(this.textAreaRemind.getText() + "\n" + title + "  -----" + date);
         this.textAreaRemind.setText(li);
         this.comboBoxRemind.getItems().remove(this.comboBoxRemind.getValue().split(" ")[0]);
         this.alertWindow("Remove Complete");
@@ -64,6 +106,18 @@ public class Controller {
         windo.setMaxHeight(100);
         windo.showAndWait();
     }
+    public void updateRemindUI(String title,String date)
+    {
+        if (this.calendar.getList().size()==0)
+        {
+            this.textAreaRemind.setText(title + "  -----" + date + "\n");
+        }
+        else {
+//            System.out.println(this.textAreaRemind);
+            this.textAreaRemind.setText(this.textAreaRemind.getText() + "\n" + title + "  -----" + date);
+        }
+        this.comboBoxRemind.getItems().add(title);
+    }
     @FXML
     public void clickBtnSave() {
         String detail = this.textAreaDetail.getText();
@@ -71,20 +125,26 @@ public class Controller {
         String date = this.datePicker.getValue()+"";
         if (!this.calendar.isSame(title))
         {
-            this.calendar.addRemind(date,title,detail);
-            if (this.calendar.getList().size()==0)
-            {
-                this.textAreaRemind.setText(title + "  -----" + date + "\n");
-            }
-            else {
-                this.textAreaRemind.setText(this.textAreaRemind.getText() + "\n" + title + "  -----" + date);
-            }
-            this.comboBoxRemind.getItems().add(title);
+            this.database.insert(calendar.id,date,title,detail);
+            this.calendar.addRemind(calendar.id,date,title,detail);
+            updateRemindUI(title,date);
+//            if (this.calendar.getList().size()==0)
+//            {
+//                this.textAreaRemind.setText(title + "  -----" + date + "\n");
+//            }
+//            else {
+//                this.textAreaRemind.setText(this.textAreaRemind.getText() + "\n" + title + "  -----" + date);
+//            }
+//            this.comboBoxRemind.getItems().add(title);
             this.clearField();
             this.alertWindow("Save Complete");
         }
         else
         {
+            int a = this.calendar.findIndex(this.comboBoxRemind.getValue());
+            Remind re = this.calendar.getList().get(a);
+            System.out.println(detail);
+            database.edit(re.getId(),detail,title,date);
             this.calendar.modify(date,title,detail);
             this.alertWindow("Modify Complete");
 
@@ -93,8 +153,40 @@ public class Controller {
 
     }
     @FXML
+    public void refreshAction() {
+        for (int i =0;i<calendar.getList().size();i++)
+        {
+            String title = calendar.getList().get(i).getTitle();
+            String date = calendar.getList().get(i).getDate();
+
+            if (!this.comboBoxRemind.getItems().contains(calendar.getList().get(i).getTitle())) {
+                if (this.calendar.getList().size()==0)
+                {
+                    this.textAreaRemind.setText(title + "  -----" + date + "\n");
+                }
+
+                else {
+//            System.out.println(this.textAreaRemind);
+                    this.textAreaRemind.setText(this.textAreaRemind.getText() + "\n" + title + "  -----" + date);
+                }
+                this.comboBoxRemind.getItems().add(calendar.getList().get(i).getTitle());
+            }
+        }
+//        if (this.calendar.getList().size()==0)
+//        {
+//            this.textAreaRemind.setText(title + "  -----" + date + "\n");
+//        }
+//        else {
+////            System.out.println(this.textAreaRemind);
+//            this.textAreaRemind.setText(this.textAreaRemind.getText() + "\n" + title + "  -----" + date);
+//        }
+//        this.comboBoxRemind.getItems().add(title);
+    }
+    @FXML
     public void clickBtnEdit() {
-        Remind re = this.calendar.getList().get(this.calendar.findIndex(this.comboBoxRemind.getValue()));
+        int a = this.calendar.findIndex(this.comboBoxRemind.getValue());
+        Remind re = this.calendar.getList().get(a);
+
         this.textAreaDetail.setText(re.getDetail());
         this.textFieldTitle.setText(re.getTitle());
     }

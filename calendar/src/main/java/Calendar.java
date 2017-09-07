@@ -3,13 +3,18 @@ import java.util.ArrayList;
 public class Calendar {
 
     public ArrayList<Remind> list;
+    int id=1;
     public Calendar()
     {
         list = new ArrayList<Remind>();
     }
-    public void addRemind(String date,String title,String detail)
+    public void addRemind(int id,String date,String title,String detail)
     {
-        list.add(new Remind(date,title,detail));
+//        id ++;
+//        System.out.println("Caledar class      id : "+this.id);
+        list.add(new Remind(id,date,title,detail));
+        this.id ++;
+
     }
     public void deletePoint(String a)
     {
@@ -24,6 +29,9 @@ public class Calendar {
     {
         this.getList().get(this.findIndex(title)).setDate(date);
         this.getList().get(this.findIndex(title)).setDetail(detail);
+    }
+    public void setID(int id){
+        this.id =id;
     }
     public boolean isSame(String a)
     {
