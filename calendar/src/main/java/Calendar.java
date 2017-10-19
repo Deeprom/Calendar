@@ -8,11 +8,11 @@ public class Calendar {
     {
         list = new ArrayList<Remind>();
     }
-    public void addRemind(int id,String date,String title,String detail)
+    public void addRemind(int id,String date,String title)
     {
 //        id ++;
 //        System.out.println("Caledar class      id : "+this.id);
-        list.add(new Remind(id,date,title,detail));
+        list.add(new Remind(id,date,title));
         this.id ++;
 
     }
@@ -28,7 +28,7 @@ public class Calendar {
     public void modify(String date,String title ,String detail)
     {
         this.getList().get(this.findIndex(title)).setDate(date);
-        this.getList().get(this.findIndex(title)).setDetail(detail);
+//        this.getList().get(this.findIndex(title)).setDetail(detail);
     }
     public void setID(int id){
         this.id =id;
@@ -47,7 +47,7 @@ public class Calendar {
     public int findIndex(String a)
     {
         int index=-99;
-//        System.out.println(a);
+//        System.out.println(Event);
 //        System.out.println(this.list);
         for (int i=0;i<this.list.size();i++)
         {

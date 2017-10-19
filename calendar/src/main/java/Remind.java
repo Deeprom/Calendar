@@ -1,40 +1,35 @@
 public class Remind {
 
-
-
-    String date;
-    String title;
-    String detail;
-    int id;
-    public Remind(int id,String date,String title,String detail)
+    public String date;
+    public String title;
+    public String detail;
+    public int id;
+    public Remind(int id, String date, String title)
     {
         this.id = id;
         this.date = date;
         this.title = title;
-        this.detail = detail;
     }
-    public void setDetail(String detail)
-    {
-        this.detail=detail;
+
+    public int getId() {
+        return id;
     }
-    public void setDate(String date)
-    {
+
+    public String getDate() {
+
+        return date;
+    }
+
+    public void setDate(String date) {
         this.date = date;
     }
-    public int getId()
-    {
-        return this.id;
+
+    public String getTitle() {
+        return title;
     }
-    public String getDetail()
-    {
-        return this.detail;
+
+    public void setTitle(String title) {
+        this.title = title;
     }
-    public String getDate()
-    {
-        return this.date;
-    }
-    public String getTitle()
-    {
-        return this.title;
-    }
+
 }

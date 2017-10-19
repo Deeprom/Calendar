@@ -9,53 +9,69 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane prefHeight="435.0" prefWidth="635.0"
+            xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="CalendarController">
    <children>
-      <TextField fx:id="textFieldTitle" layoutX="101.0" layoutY="132.0" prefHeight="35.0" prefWidth="206.0">
+      <TextField fx:id="textFieldTitle" layoutX="369.0" layoutY="115.0" prefHeight="35.0" prefWidth="206.0" promptText="Title">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <Label fx:id="labelDate" layoutX="36.0" layoutY="137.0" prefHeight="25.0" prefWidth="49.0" text="Title">
+      <Label fx:id="labelDate" layoutX="312.0" layoutY="120.0" prefHeight="25.0" prefWidth="49.0" text="Title : ">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="buttonSave" layoutX="33.0" layoutY="342.0" mnemonicParsing="false" onAction="#clickBtnSave" text="Save">
+      <Button fx:id="buttonSave" layoutX="15.0" layoutY="387.0" mnemonicParsing="false" onAction="#clickBtnSave" text="Save">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="buttonEdit" layoutX="420.0" layoutY="342.0" mnemonicParsing="false" onAction="#clickBtnEdit" text="Edit">
+      <Button fx:id="buttonEdit" layoutX="340.0" layoutY="387.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="49.0" text="Edit">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="Remove" layoutX="479.0" layoutY="342.0" mnemonicParsing="false" onAction="#clickBtnRemove" text="Remove">
+      <Button fx:id="Remove" layoutX="255.0" layoutY="387.0" mnemonicParsing="false" onAction="#clickBtnRemove" prefHeight="35.0" prefWidth="80.0" text="Remove">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Label layoutX="243.0" layoutY="25.0" text="Remind">
+      <Label layoutX="254.0" layoutY="14.0" text="Remind">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <DatePicker fx:id="datePicker" layoutX="101.0" layoutY="87.0" prefHeight="35.0" prefWidth="183.0" />
-      <Label layoutX="36.0" layoutY="96.0" text="Date">
+      <DatePicker fx:id="datePickerDate" layoutX="69.0" layoutY="116.0" prefHeight="35.0" prefWidth="183.0" promptText="Date" />
+      <Label layoutX="16.0" layoutY="119.0" text="Date : ">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextArea fx:id="textAreaDetail" layoutX="33.0" layoutY="187.0" prefHeight="140.0" prefWidth="231.0" />
-      <TextArea fx:id="textAreaRemind" editable="false" layoutX="300.0" layoutY="187.0" prefHeight="140.0" prefWidth="262.0" />
-      <Label layoutX="368.0" layoutY="137.0" prefHeight="27.0" prefWidth="103.0" text="Remind List" textAlignment="CENTER">
+      <TextArea fx:id="textAreaDetail" layoutX="14.0" layoutY="166.0" prefHeight="216.0" prefWidth="231.0" promptText="Detail" />
+      <TextArea fx:id="textAreaRemind" editable="false" layoutX="254.0" layoutY="165.0" prefHeight="216.0" prefWidth="262.0" />
+      <Label layoutX="520.0" layoutY="354.0" prefHeight="27.0" prefWidth="110.0" text="Remind List : " textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <ComboBox fx:id="comboBoxRemind" layoutX="307.0" layoutY="343.0" prefHeight="35.0" prefWidth="103.0" />
-      <Button fx:id="buttonRefresh" layoutX="469.0" layoutY="138.0" mnemonicParsing="false" onAction="#refreshAction" text="Refresh" />
+      <ComboBox fx:id="comboBoxRemind" layoutX="393.0" layoutY="388.0" prefHeight="35.0" prefWidth="134.0" promptText="Choose Title" />
+      <Button fx:id="buttonRefresh" layoutX="538.0" layoutY="384.0" mnemonicParsing="false" onAction="#refreshAction" text="Refresh">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Label layoutX="16.0" layoutY="71.0" text="Search : ">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <ComboBox fx:id="comboBoxMenu" layoutX="78.0" layoutY="389.0" prefHeight="35.0" prefWidth="134.0" promptText="Type" />
+      <TextField fx:id="textFieldSearch" layoutX="96.0" layoutY="59.0" prefHeight="37.0" prefWidth="183.0" promptText="Search">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
 
    </children>
 </AnchorPane>
